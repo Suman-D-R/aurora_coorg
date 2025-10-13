@@ -1,12 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { IconBrandWhatsapp } from '@tabler/icons-react';
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
 
 export default function BookingForm() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+  const fadeUpVariant = {
+    hidden: { opacity: 0, y: 60 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     phone: '',
     checkIn: '',
     checkOut: '',
@@ -29,7 +38,6 @@ export default function BookingForm() {
     // Validate form fields
     if (
       !formData.name ||
-      !formData.email ||
       !formData.phone ||
       !formData.checkIn ||
       !formData.checkOut
@@ -43,7 +51,6 @@ export default function BookingForm() {
 
 *Guest Details:*
 Name: ${formData.name}
-Email: ${formData.email}
 Phone: ${formData.phone}
 
 *Stay Details:*
@@ -54,7 +61,7 @@ Number of Guests: ${formData.guests}
 Looking forward to your confirmation!`;
 
     // Replace this with your WhatsApp business number (in international format without + sign)
-    const whatsappNumber = '919876543210'; // Example: 919876543210 for India
+    const whatsappNumber = '918861821773'; // Example: 919876543210 for India
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
@@ -64,22 +71,35 @@ Looking forward to your confirmation!`;
 
   return (
     <section
+      ref={ref}
       id='booking'
       className='py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white'
     >
       <div className='max-w-4xl mx-auto'>
         {/* Section Header */}
-        <div className='text-center mb-8 sm:mb-12'>
+        <motion.div
+          className='text-center mb-8 sm:mb-12'
+          initial='hidden'
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeUpVariant}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           <h2 className='text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4'>
             Book Your Stay
           </h2>
           <p className='text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-4'>
             Fill in your details and send us an inquiry via WhatsApp
           </p>
-        </div>
+        </motion.div>
 
         {/* Booking Form */}
-        <div className='bg-white rounded-xl p-4 sm:p-8'>
+        <motion.div
+          className='bg-white rounded-xl p-4 sm:p-8'
+          initial='hidden'
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeUpVariant}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           <form onSubmit={handleWhatsAppSubmit} className='space-y-6'>
             {/* Personal Information */}
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
@@ -119,29 +139,9 @@ Looking forward to your confirmation!`;
                   onChange={handleInputChange}
                   required
                   className='w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:border-gray-400 focus:outline-none transition-colors'
-                  placeholder='+91 98765 43210'
+                  placeholder='+91 8861821773'
                 />
               </div>
-            </div>
-
-            {/* Email */}
-            <div>
-              <label
-                htmlFor='email'
-                className='block text-sm font-semibold text-gray-900 mb-1 sm:mb-2'
-              >
-                Email Address *
-              </label>
-              <input
-                type='email'
-                id='email'
-                name='email'
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-                className='w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:border-gray-400 focus:outline-none transition-colors'
-                placeholder='john.doe@example.com'
-              />
             </div>
 
             {/* Date Selection */}
@@ -245,20 +245,26 @@ Looking forward to your confirmation!`;
               send your inquiry.
             </p>
           </form>
-        </div>
+        </motion.div>
 
         {/* Additional Info */}
-        <div className='mt-8 sm:mt-12 text-center'>
+        <motion.div
+          className='mt-8 sm:mt-12 text-center'
+          initial='hidden'
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeUpVariant}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           <p className='text-gray-600 text-sm sm:text-base'>
             Need help? Contact us directly at{' '}
             <a
-              href='tel:+919876543210'
+              href='tel:+918861821773'
               className='text-black font-semibold hover:underline'
             >
-              +91 98765 43210
+              +91 8861821773
             </a>
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

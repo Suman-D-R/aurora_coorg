@@ -2,8 +2,16 @@
 
 import Image from 'next/image';
 import { IconExternalLink, IconStar } from '@tabler/icons-react';
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 export default function BookWithUs() {
+  const fadeUpVariant = {
+    hidden: { opacity: 0, y: 60 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   const bookingPlatforms = [
     {
       name: 'Airbnb',
@@ -35,7 +43,14 @@ export default function BookWithUs() {
     <section className='py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white'>
       <div className='max-w-7xl mx-auto'>
         {/* Section Header */}
-        <div className='text-center mb-8 sm:mb-12'>
+        <motion.div
+          className='text-center mb-8 sm:mb-12'
+          initial='hidden'
+          whileInView='visible'
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeUpVariant}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           <h2 className='text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4'>
             Book With Us
           </h2>
@@ -43,17 +58,27 @@ export default function BookWithUs() {
             Find us on your favorite booking platforms and choose the best
             option for your stay
           </p>
-        </div>
+        </motion.div>
 
         {/* Booking Platforms Grid */}
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12'>
+        <motion.div
+          initial='hidden'
+          className='grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12'
+          whileInView='visible'
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeUpVariant}
+          transition={{
+            duration: 0.8,
+            ease: [0.25, 0.1, 0.25, 1],
+          }}
+        >
           {bookingPlatforms.map((platform, index) => (
             <a
               key={index}
               href={platform.url}
               target='_blank'
               rel='noopener noreferrer'
-              className='group relative h-48 sm:h-56 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer bg-white border border-gray-200'
+              className='group relative h-48 sm:h-56 border border-gray-200 rounded-xl overflow-hidden  transition-all duration-300 cursor-pointer '
             >
               {/* Content */}
               <div className='relative h-full flex flex-col items-center justify-center p-4 sm:p-6 text-gray-900'>
@@ -86,10 +111,17 @@ export default function BookWithUs() {
               </div>
             </a>
           ))}
-        </div>
+        </motion.div>
 
         {/* Why Book With Us */}
-        <div className='rounded-xl p-4 sm:p-8 mb-8 sm:mb-12'>
+        <motion.div
+          className='rounded-xl p-4 sm:p-8 mb-8 sm:mb-12'
+          initial='hidden'
+          whileInView='visible'
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeUpVariant}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           <h3 className='text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center'>
             Why Book With Us
           </h3>
@@ -128,10 +160,17 @@ export default function BookWithUs() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Trust Indicators */}
-        <div className='grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center'>
+        <motion.div
+          className='grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center'
+          initial='hidden'
+          whileInView='visible'
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeUpVariant}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           <div>
             <div className='text-2xl sm:text-3xl font-bold text-black mb-1 sm:mb-2'>
               4.9★
@@ -160,7 +199,7 @@ export default function BookWithUs() {
             </div>
             <div className='text-xs sm:text-sm text-gray-600'>Support</div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

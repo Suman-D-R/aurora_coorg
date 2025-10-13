@@ -1,3 +1,5 @@
+'use client';
+
 import {
   IconShieldCheck,
   IconClock,
@@ -6,8 +8,13 @@ import {
   IconSparkles,
   IconMapPin,
 } from '@tabler/icons-react';
+import { motion } from 'framer-motion';
 
 export default function WhyChooseUs() {
+  const fadeUpVariant = {
+    hidden: { opacity: 0, y: 60 },
+    visible: { opacity: 1, y: 0 },
+  };
   const features = [
     {
       icon: IconShieldCheck,
@@ -51,17 +58,34 @@ export default function WhyChooseUs() {
     <section className='py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white'>
       <div className='max-w-7xl mx-auto'>
         {/* Section Header */}
-        <div className='text-center mb-8 sm:mb-12'>
+        <motion.div
+          className='text-center mb-8 sm:mb-12'
+          initial='hidden'
+          whileInView='visible'
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeUpVariant}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           <h2 className='text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4'>
             Why Choose Aurora Coorg
           </h2>
           <p className='text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-2'>
             We're committed to making your vacation experience unforgettable
           </p>
-        </div>
+        </motion.div>
 
         {/* Features Grid */}
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8'>
+        <motion.div
+          initial='hidden'
+          className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8'
+          whileInView='visible'
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeUpVariant}
+          transition={{
+            duration: 0.8,
+            ease: [0.25, 0.1, 0.25, 1],
+          }}
+        >
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
             return (
@@ -81,7 +105,7 @@ export default function WhyChooseUs() {
               </div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

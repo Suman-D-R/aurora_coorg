@@ -35,3 +35,22 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+.shimmer {
+  background: linear-gradient(90deg, #00000000 25%, #b7ff7c 50%, #00000000 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2.5s infinite;
+  position: absolute;
+  transform: skewX(-45deg);
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: 1;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+}

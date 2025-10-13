@@ -8,13 +8,30 @@ import {
   IconMapPin,
 } from '@tabler/icons-react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 const Footer = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+  const fadeUpVariant = {
+    hidden: { opacity: 0, y: 60 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
-    <footer className='bg-gray-900 text-gray-300'>
+    <footer ref={ref} className='bg-gray-900 text-gray-300'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16'>
         {/* Main Footer Content */}
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8'>
+        <motion.div
+          className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8'
+          initial='hidden'
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeUpVariant}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           {/* Company Info */}
           <div>
             <h3 className='text-lg sm:text-xl font-bold mb-2 sm:mb-3 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent'>
@@ -36,7 +53,7 @@ const Footer = () => {
                 <IconBrandInstagram className='w-5 h-5' />
               </a>
               <a
-                href='https://wa.me/1234567890'
+                href='https://wa.me/918861821773'
                 target='_blank'
                 rel='noopener noreferrer'
                 className='bg-gray-800 p-2 rounded-full hover:bg-green-500 transition-colors touch-manipulation'
@@ -124,7 +141,7 @@ const Footer = () => {
             <ul className='space-y-2'>
               <li className='flex items-start'>
                 <IconPhone className='w-4 h-4 mr-2 mt-0.5 flex-shrink-0' />
-                <span className='text-xs sm:text-sm'>+1 (555) 123-4567</span>
+                <span className='text-xs sm:text-sm'>+91 8861821773</span>
               </li>
               <li className='flex items-start'>
                 <IconMail className='w-4 h-4 mr-2 mt-0.5 flex-shrink-0' />
@@ -138,10 +155,16 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-        </div>
+        </motion.div>
 
         {/* Bottom Bar */}
-        <div className='border-t border-gray-800 pt-4 sm:pt-6 mt-6 sm:mt-8'>
+        <motion.div
+          className='border-t border-gray-800 pt-4 sm:pt-6 mt-6 sm:mt-8'
+          initial='hidden'
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeUpVariant}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           <div className='flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4'>
             <p className='text-[10px] sm:text-xs text-gray-400 text-center md:text-left'>
               © 2025 Aurora Coorg. All rights reserved.
@@ -161,7 +184,7 @@ const Footer = () => {
               </a>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

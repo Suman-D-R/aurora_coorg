@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import {
   IconUsers,
   IconBed,
@@ -89,11 +90,23 @@ const servicesAmenities = [
 ];
 
 const OurStays = () => {
+  const fadeUpVariant = {
+    hidden: { opacity: 0, y: 60 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
     <section className='py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white'>
       <div className='max-w-7xl mx-auto'>
         {/* Section Header */}
-        <div className='text-center mb-8 sm:mb-12'>
+        <motion.div
+          className='text-center mb-8 sm:mb-12'
+          initial='hidden'
+          whileInView='visible'
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeUpVariant}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           <h2 className='text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4'>
             Our Stays
           </h2>
@@ -101,14 +114,23 @@ const OurStays = () => {
             Choose from our comfortable accommodation options, each designed to
             provide you with an unforgettable experience in the heart of Coorg.
           </p>
-        </div>
+        </motion.div>
 
         {/* Accommodation Options */}
         <div className='grid sm:grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16'>
-          {stayOptions.map((stay) => (
-            <div
+          {stayOptions.map((stay, index) => (
+            <motion.div
               key={stay.id}
               className='relative h-80 sm:h-96 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 group cursor-pointer'
+              initial='hidden'
+              whileInView='visible'
+              viewport={{ once: true, amount: 0.2 }}
+              variants={fadeUpVariant}
+              transition={{
+                duration: 0.8,
+                delay: index * 0.2,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
             >
               {/* Full Image Background */}
               <Image
@@ -158,12 +180,19 @@ const OurStays = () => {
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Inclusions Section */}
-        <div className='rounded-xl p-4 sm:p-8 mb-8 sm:mb-12'>
+        <motion.div
+          className='rounded-xl p-4 sm:p-8 mb-8 sm:mb-12'
+          initial='hidden'
+          whileInView='visible'
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeUpVariant}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           <h3 className='text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center'>
             What's Included
           </h3>
@@ -193,14 +222,34 @@ const OurStays = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Services & Amenities */}
         <div>
-          <h3 className='text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-8 text-center'>
+          <motion.h3
+            className='text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-8 text-center'
+            initial='hidden'
+            whileInView='visible'
+            viewport={{ once: true, amount: 0.2 }}
+            variants={fadeUpVariant}
+            transition={{
+              duration: 0.8,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+          >
             Services & Amenities
-          </h3>
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8'>
+          </motion.h3>
+          <motion.div
+            className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8'
+            initial='hidden'
+            whileInView='visible'
+            viewport={{ once: true, amount: 0.2 }}
+            variants={fadeUpVariant}
+            transition={{
+              duration: 0.8,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+          >
             {servicesAmenities.map((service, index) => {
               const IconComponent = service.icon;
               return (
@@ -220,18 +269,39 @@ const OurStays = () => {
                 </div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
 
         {/* Gallery Preview */}
         <div className='mt-8 sm:mt-12'>
-          <h3 className='text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center'>
+          <motion.h3
+            className='text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center'
+            initial='hidden'
+            whileInView='visible'
+            viewport={{ once: true, amount: 0.2 }}
+            variants={fadeUpVariant}
+            transition={{
+              duration: 0.8,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+          >
             Rooms & Amenities
-          </h3>
-          <div className='grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4'>
+          </motion.h3>
+
+          <motion.div
+            initial='hidden'
+            className='grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4'
+            whileInView='visible'
+            viewport={{ once: true, amount: 0.2 }}
+            variants={fadeUpVariant}
+            transition={{
+              duration: 0.8,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+          >
             {[
               '/images/aurora-room-1.webp',
-              '/images/aurora-room-2.webp',
+              '/images/aurora-villa.webp',
               '/images/aurora-room-3.webp',
               '/images/aurora-room-4.webp',
             ].map((image, index) => (
@@ -247,7 +317,7 @@ const OurStays = () => {
                 />
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

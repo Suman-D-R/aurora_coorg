@@ -1,8 +1,13 @@
 'use client';
 
 import { IconMapPin, IconNavigation } from '@tabler/icons-react';
+import { motion } from 'framer-motion';
 
 export default function LocationMap() {
+  const fadeUpVariant = {
+    hidden: { opacity: 0, y: 60 },
+    visible: { opacity: 1, y: 0 },
+  };
   const handleGetDirections = () => {
     // Replace with your actual coordinates
     const latitude = 12.42; // Coorg latitude
@@ -23,7 +28,14 @@ export default function LocationMap() {
     <section className='py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white'>
       <div className='max-w-7xl mx-auto'>
         {/* Section Header */}
-        <div className='text-center mb-8 sm:mb-12'>
+        <motion.div
+          className='text-center mb-8 sm:mb-12'
+          initial='hidden'
+          whileInView='visible'
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeUpVariant}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           <h2 className='text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4'>
             Find Us
           </h2>
@@ -31,10 +43,17 @@ export default function LocationMap() {
             Located in the heart of Coorg, close to all major tourist
             attractions
           </p>
-        </div>
+        </motion.div>
 
         {/* Map Container */}
-        <div className='relative h-80 sm:h-96 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 mb-8 sm:mb-12'>
+        <motion.div
+          className='relative h-80 sm:h-96 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 mb-8 sm:mb-12'
+          initial='hidden'
+          whileInView='visible'
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeUpVariant}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           <iframe
             src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15318.708954944701!2d75.73843413447666!3d12.408420419983687!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba5abb8aefcde69%3A0xc001e903f45f397e!2sThe%20Aurora%20Coorg%20Stay!5e0!3m2!1sen!2sae!4v1760341079364!5m2!1sen!2sae'
             width='100%'
@@ -45,10 +64,17 @@ export default function LocationMap() {
             referrerPolicy='no-referrer-when-downgrade'
             title='The Aurora Coorg Stay Location'
           ></iframe>
-        </div>
+        </motion.div>
 
         {/* Location Details */}
-        <div className='rounded-xl p-4 sm:p-8 mb-8 sm:mb-12'>
+        <motion.div
+          className='rounded-xl p-4 sm:p-8 mb-8 sm:mb-12'
+          initial='hidden'
+          whileInView='visible'
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeUpVariant}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           <h3 className='text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center'>
             Location Details
           </h3>
@@ -76,14 +102,31 @@ export default function LocationMap() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Nearby Attractions */}
         <div>
-          <h3 className='text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-8 text-center'>
+          <motion.h3
+            className='text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-8 text-center'
+            initial='hidden'
+            whileInView='visible'
+            viewport={{ once: true, amount: 0.2 }}
+            variants={fadeUpVariant}
+            transition={{
+              duration: 0.8,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+          >
             Nearby Attractions
-          </h3>
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6'>
+          </motion.h3>
+          <motion.div
+            className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6'
+            initial='hidden'
+            whileInView='visible'
+            viewport={{ once: true, amount: 0.2 }}
+            variants={fadeUpVariant}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+          >
             {[
               { name: "Raja's Seat", distance: '2 km' },
               { name: 'Madikeri Fort', distance: '3 km' },
@@ -105,11 +148,18 @@ export default function LocationMap() {
                 </p>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Action Buttons */}
-        <div className='mt-8 sm:mt-12 flex flex-col sm:flex-row gap-4 justify-center'>
+        <motion.div
+          className='mt-8 sm:mt-12 flex flex-col sm:flex-row gap-4 justify-center'
+          initial='hidden'
+          whileInView='visible'
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeUpVariant}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        >
           <button
             onClick={handleGetDirections}
             className='flex items-center justify-center space-x-2 bg-black hover:bg-gray-800 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200'
@@ -124,7 +174,7 @@ export default function LocationMap() {
             <IconMapPin className='w-5 h-5' />
             <span>View on Map</span>
           </button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

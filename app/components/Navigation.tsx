@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
 import { IconMenu2, IconX } from '@tabler/icons-react';
 
 interface NavLink {
@@ -11,11 +9,11 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  { href: '/', label: 'Home' },
-  { href: '/properties', label: 'properties' },
-  { href: '/testimonials', label: 'Testimonials' },
-  { href: '/#booking', label: 'Book Now' },
-  { href: '/blog', label: 'Blog' },
+  { href: '#', label: 'Home' },
+  { href: '#our-stays', label: 'Properties' },
+  { href: '#testimonials', label: 'Testimonials' },
+  { href: '#booking', label: 'Book Now' },
+  { href: '#location', label: 'Location' },
 ];
 
 const Navigation = () => {
@@ -53,10 +51,38 @@ const Navigation = () => {
     };
   }, []);
 
+  // Smooth scroll to section
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+
+    if (href === '#') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    const element = document.querySelector(href);
+    if (element) {
+      const offset = 80; // Offset for fixed header
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || isMenuOpen ? 'bg-white shadow-md' : 'bg-transparent'
+        isScrolled || isMenuOpen
+          ? 'bg-white/80 backdrop-blur-sm shadow-md'
+          : 'bg-transparent'
       }`}
       ref={menuRef}
     >
@@ -64,7 +90,11 @@ const Navigation = () => {
         <div className='flex justify-between items-center h-14 sm:h-16'>
           {/* Logo */}
           <div className='flex-shrink-0'>
-            <Link href='/' className='flex items-center'>
+            <a
+              href='#'
+              onClick={(e) => handleNavClick(e, '#')}
+              className='flex items-center cursor-pointer'
+            >
               {/* <Image
                 src='/images/logo.webp'
                 alt='Logo'
@@ -76,18 +106,19 @@ const Navigation = () => {
                   isScrolled || isMenuOpen ? 'text-gray-900' : 'text-white'
                 }`}
               >
-                The Aurora Coorg
+                Aurora Coorg
               </span>
-            </Link>
+            </a>
           </div>
 
           {/* Desktop Navigation - Centered */}
           <nav className='hidden md:flex absolute left-1/2 -translate-x-1/2 gap-1 lg:gap-2'>
             {navLinks.map((link: NavLink) => (
-              <Link
+              <a
                 key={link.href}
                 href={link.href}
-                className={`px-2 lg:px-3 py-2 rounded-md text-sm lg:text-base font-medium relative group transition-colors duration-300 ${
+                onClick={(e) => handleNavClick(e, link.href)}
+                className={`px-2 lg:px-3 py-2 rounded-md text-sm lg:text-base font-medium relative group transition-colors duration-300 cursor-pointer ${
                   isScrolled
                     ? 'text-gray-700 hover:text-gray-900'
                     : 'text-white hover:text-gray-100'
@@ -99,22 +130,23 @@ const Navigation = () => {
                     isScrolled ? 'bg-gray-900' : 'bg-gray-100'
                   }`}
                 ></span>
-              </Link>
+              </a>
             ))}
           </nav>
 
           {/* Contact Button */}
           <div className='hidden md:block'>
-            <Link
-              href='/contact'
-              className={`px-4 lg:px-6 py-2  rounded-full text-sm lg:text-base font-medium transition-colors duration-300 ${
+            <a
+              href='#booking'
+              onClick={(e) => handleNavClick(e, '#booking')}
+              className={`px-4 lg:px-6 py-2  rounded-full text-sm lg:text-base font-medium transition-colors duration-300 cursor-pointer ${
                 isScrolled
                   ? 'text-white hover:text-gray-200 bg-black'
                   : 'text-black hover:text-gray-600 bg-white'
               }`}
             >
               Contact
-            </Link>
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -144,22 +176,22 @@ const Navigation = () => {
       >
         <div className='px-2 pt-2 pb-3 space-y-1 sm:px-3 max-w-7xl mx-auto'>
           {navLinks.map((link: NavLink) => (
-            <Link
+            <a
               key={link.href}
               href={link.href}
-              onClick={() => setIsMenuOpen(false)}
-              className='block px-3 py-3 rounded-md text-base cursor-pointer font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-colors duration-200 touch-manipulation'
+              onClick={(e) => handleNavClick(e, link.href)}
+              className='block px-3 py-3 rounded-md text-base text-center cursor-pointer font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-colors duration-200 touch-manipulation'
             >
               {link.label}
-            </Link>
+            </a>
           ))}
-          <Link
-            href='/contact'
-            onClick={() => setIsMenuOpen(false)}
+          <a
+            href='#booking'
+            onClick={(e) => handleNavClick(e, '#booking')}
             className='block px-3 py-3 rounded-md text-base cursor-pointer font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-colors duration-200 text-center mt-2 touch-manipulation'
           >
             Contact
-          </Link>
+          </a>
         </div>
       </div>
     </header>

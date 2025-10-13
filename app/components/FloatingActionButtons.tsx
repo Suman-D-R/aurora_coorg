@@ -3,8 +3,8 @@
 import { IconBrandWhatsapp, IconPhone } from '@tabler/icons-react';
 
 const FloatingActionButtons = () => {
-  const phoneNumber = '+919876543210'; // Replace with actual phone number
-  const whatsappNumber = '919876543210'; // Replace with actual WhatsApp number (without + or spaces)
+  const phoneNumber = '+918861821773'; // Replace with actual phone number
+  const whatsappNumber = '918861821773'; // Replace with actual WhatsApp number (without + or spaces)
   const whatsappMessage =
     'Hello! I would like to inquire about booking a stay at Aurora Coorg.';
 
