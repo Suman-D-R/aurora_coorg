@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+/* Base styles */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #f0f0f0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) {
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+}
+
+/* Prevent text size adjustment on orientation change */
+@media screen and (orientation: portrait) {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+}
+
+/* Improve image rendering on mobile */
+img {
+  max-width: 100%;
+  height: auto;
+}
