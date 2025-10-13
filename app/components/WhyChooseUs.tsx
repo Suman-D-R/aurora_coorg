@@ -61,21 +61,21 @@ export default function WhyChooseUs() {
         </div>
 
         {/* Features Grid */}
-        <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8'>
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
             return (
               <div
                 key={index}
-                className='text-center p-3 sm:p-6 transition-shadow duration-300'
+                className='text-center p-4 sm:p-6 transition-shadow duration-300 bg-gray-50 rounded-lg hover:bg-gray-100'
               >
-                <div className='flex justify-center text-black mb-2 sm:mb-4'>
-                  <IconComponent className='w-6 h-6 sm:w-8 sm:h-8' />
+                <div className='flex justify-center text-black mb-3 sm:mb-4'>
+                  <IconComponent className='w-8 h-8 sm:w-10 sm:h-10' />
                 </div>
-                <h4 className='font-semibold text-gray-900 mb-1 sm:mb-2 text-xs sm:text-sm'>
+                <h4 className='font-semibold text-gray-900 mb-2 sm:mb-3 text-sm sm:text-base'>
                   {feature.title}
                 </h4>
-                <p className='text-gray-600 text-[10px] sm:text-xs'>
+                <p className='text-gray-600 text-xs sm:text-sm leading-relaxed'>
                   {feature.description}
                 </p>
               </div>

@@ -101,9 +101,7 @@ export default function Testimonials() {
             return (
               <div
                 key={index}
-                className={`bg-white p-4 sm:p-6 rounded-lg border border-gray-200 hover:shadow-md transition-all duration-300 flex flex-col ${
-                  isExpanded ? 'h-auto min-h-[320px]' : 'h-[320px]'
-                }`}
+                className='bg-white p-4 sm:p-6 rounded-lg border border-gray-200 hover:shadow-md transition-all duration-300 flex flex-col min-h-[280px] sm:min-h-[320px]'
               >
                 {/* Stars */}
                 <div className='flex mb-2 sm:mb-3'>
@@ -116,12 +114,8 @@ export default function Testimonials() {
                 </div>
 
                 {/* Text */}
-                <div
-                  className={
-                    isExpanded ? 'flex-grow' : 'flex-grow overflow-hidden'
-                  }
-                >
-                  <p className='text-xs sm:text-sm text-gray-700 mb-3 sm:mb-4 italic leading-relaxed'>
+                <div className='flex-grow mb-3'>
+                  <p className='text-sm sm:text-base text-gray-700 mb-3 sm:mb-4 italic leading-relaxed'>
                     "{displayText}"
                   </p>
 
@@ -129,7 +123,7 @@ export default function Testimonials() {
                   {shouldTruncate && (
                     <button
                       onClick={() => toggleExpanded(index)}
-                      className='text-xs text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200 mb-3'
+                      className='text-xs sm:text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200 mb-3'
                     >
                       {isExpanded ? 'Read Less' : 'Read More'}
                     </button>
@@ -137,25 +131,21 @@ export default function Testimonials() {
                 </div>
 
                 {/* Property */}
-                <p className='text-xs sm:text-sm text-black font-semibold mb-2 sm:mb-3'>
+                <p className='text-sm sm:text-base text-black font-semibold mb-3'>
                   {testimonial.property}
                 </p>
 
                 {/* Author */}
-                <div
-                  className={`flex items-center pt-2 sm:pt-3 border-t border-gray-200 ${
-                    isExpanded ? 'mt-4' : 'mt-auto'
-                  }`}
-                >
+                <div className='flex items-center pt-3 border-t border-gray-200 mt-auto'>
                   <div
-                    className='w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-cover bg-center mr-2 sm:mr-3 flex-shrink-0'
+                    className='w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cover bg-center mr-3 flex-shrink-0'
                     style={{ backgroundImage: `url('${testimonial.image}')` }}
                   ></div>
                   <div>
-                    <div className='font-semibold text-xs sm:text-sm text-gray-900'>
+                    <div className='font-semibold text-sm sm:text-base text-gray-900'>
                       {testimonial.name}
                     </div>
-                    <div className='text-[10px] sm:text-xs text-gray-600'>
+                    <div className='text-xs sm:text-sm text-gray-600'>
                       {testimonial.location}
                     </div>
                   </div>

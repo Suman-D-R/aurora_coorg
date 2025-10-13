@@ -70,10 +70,10 @@ Looking forward to your confirmation!`;
       <div className='max-w-4xl mx-auto'>
         {/* Section Header */}
         <div className='text-center mb-8 sm:mb-12'>
-          <h2 className='text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4'>
+          <h2 className='text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4'>
             Book Your Stay
           </h2>
-          <p className='text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-2'>
+          <p className='text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-4'>
             Fill in your details and send us an inquiry via WhatsApp
           </p>
         </div>
@@ -233,12 +233,10 @@ Looking forward to your confirmation!`;
             <div className='pt-4'>
               <button
                 type='submit'
-                className='w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3'
+                className='w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold px-6 sm:px-8 py-4 rounded-lg text-base sm:text-lg transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 shadow-lg hover:shadow-xl'
               >
-                <IconBrandWhatsapp className='w-5 h-5 sm:w-6 sm:h-6' />
-                <span className='text-sm sm:text-base'>
-                  Send Inquiry via WhatsApp
-                </span>
+                <IconBrandWhatsapp className='w-6 h-6' />
+                <span>Send Inquiry via WhatsApp</span>
               </button>
             </div>
 
