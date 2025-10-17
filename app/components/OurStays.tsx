@@ -1,60 +1,18 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
   IconUsers,
-  IconBed,
-  IconFlame,
-  IconDeviceGamepad2,
+  IconMapPin,
   IconChefHat,
-  IconWifi,
-  IconParking,
   IconMusic,
+  IconDeviceGamepad2,
+  IconParking,
+  IconWifi,
 } from '@tabler/icons-react';
-
-interface StayOption {
-  id: number;
-  title: string;
-  capacity: string;
-  guests: number;
-  description: string;
-  image: string;
-  features: string[];
-}
-
-const stayOptions: StayOption[] = [
-  {
-    id: 1,
-    title: 'Full Villa',
-    capacity: 'Up to 25 guests',
-    guests: 25,
-    description:
-      'Experience luxury and comfort in our spacious villa, perfect for large groups and family gatherings.',
-    image: '/images/aurora-villa.webp',
-    features: [
-      'Multiple bedrooms',
-      'Large common areas',
-      'Full kitchen access',
-      'Private grounds',
-    ],
-  },
-  {
-    id: 2,
-    title: 'Cottage',
-    capacity: '2-4 guests',
-    guests: 4,
-    description:
-      'Cozy and intimate cottages ideal for couples or small families seeking a peaceful retreat.',
-    image: '/images/aurora-cottage.webp',
-    features: [
-      'Private entrance',
-      'Comfortable bedrooms',
-      'Modern amenities',
-      'Garden view',
-    ],
-  },
-];
+import { properties, Property } from '../data/properties';
 
 const servicesAmenities = [
   {
@@ -108,20 +66,20 @@ const OurStays = () => {
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <h2 className='text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4'>
-            Our Stays
+            Our Properties
           </h2>
           <p className='text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-2'>
-            Choose from our comfortable accommodation options, each designed to
-            provide you with an unforgettable experience in the heart of Coorg.
+            Discover our carefully selected properties, each offering unique
+            experiences and designed to provide you with an unforgettable stay.
           </p>
         </motion.div>
 
-        {/* Accommodation Options */}
-        <div className='grid sm:grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16'>
-          {stayOptions.map((stay, index) => (
+        {/* Properties Grid */}
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16'>
+          {properties.map((property, index) => (
             <motion.div
-              key={stay.id}
-              className='relative h-80 sm:h-96 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 group cursor-pointer'
+              key={property.id}
+              className='relative h-80 sm:h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group cursor-pointer'
               initial='hidden'
               whileInView='visible'
               viewport={{ once: true, amount: 0.2 }}
@@ -134,50 +92,53 @@ const OurStays = () => {
             >
               {/* Full Image Background */}
               <Image
-                src={stay.image}
-                alt={stay.title}
+                src={property.image}
+                alt={property.name}
                 fill
-                className={`object-cover  group-hover:scale-105 transition-transform duration-300 ${
-                  stay.id === 1 ? 'object-bottom' : 'object-center'
-                }`}
+                className='object-cover group-hover:scale-105 transition-transform duration-300 object-center'
               />
 
               {/* Gradient Overlay */}
-              <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent'></div>
+              <div className='absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent'></div>
 
               {/* Content Overlay */}
               <div className='absolute bottom-0 left-0 right-0 p-4 sm:p-6 text-white'>
-                {/* Title and Capacity */}
-                <div className='flex flex-col items-start justify-between mb-2'>
-                  <h3 className='text-xl sm:text-2xl font-bold'>
-                    {stay.title}
-                  </h3>
-                  <div className='flex items-center gap-1.5 text-white/90 mt-1'>
+                {/* Property Name */}
+                <h3 className='text-xl sm:text-2xl font-bold mb-2'>
+                  {property.name}
+                </h3>
+
+                {/* Location */}
+                <div className='flex items-center gap-1.5 mb-3'>
+                  <IconMapPin className='w-4 h-4 text-white/80' />
+                  <span className='text-white/80 text-sm'>
+                    {property.location}
+                  </span>
+                </div>
+
+                {/* Capacity and Price */}
+                <div className='flex items-center justify-between mb-4'>
+                  <div className='flex items-center gap-1.5 text-white/90'>
                     <IconUsers className='w-4 h-4' />
-                    <span className='font-semibold text-sm sm:text-base'>
-                      {stay.capacity}
+                    <span className='font-semibold text-sm'>
+                      {property.capacity}
                     </span>
+                  </div>
+                  <div className='text-right'>
+                    <p className='text-white/90 text-sm font-semibold'>
+                      {property.startingPrice}
+                    </p>
                   </div>
                 </div>
 
-                {/* Description */}
-                <p className='text-white/90 mb-3 text-xs sm:text-sm leading-tight'>
-                  {stay.description}
-                </p>
-
-                {/* Features */}
-                <div className='grid grid-cols-2 gap-2'>
-                  {stay.features.map((feature, index) => (
-                    <div
-                      key={index}
-                      className='flex items-center gap-1.5 text-white/90'
-                    >
-                      <div className='w-1.5 h-1.5 bg-white rounded-full'></div>
-                      <span className='text-xs sm:text-sm font-medium'>
-                        {feature}
-                      </span>
-                    </div>
-                  ))}
+                {/* View Property Button */}
+                <div className='mt-4'>
+                  <Link
+                    href={`/property/${property.id}`}
+                    className='bg-white text-black font-semibold px-4 py-2 rounded-lg text-sm transition-all duration-300 hover:bg-gray-100 hover:scale-105 w-full block text-center'
+                  >
+                    View Property
+                  </Link>
                 </div>
               </div>
             </motion.div>

@@ -16,20 +16,43 @@ export default function BookingForm() {
 
   const [formData, setFormData] = useState({
     name: '',
-    phone: '',
+    place: 'Aurora Coorg',
     checkIn: '',
     checkOut: '',
     guests: 1,
+  });
+
+  const [bookingSummary, setBookingSummary] = useState({
+    nights: 0,
+    days: 0,
   });
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
+    const newFormData = {
+      ...formData,
       [name]: value,
-    }));
+    };
+    setFormData(newFormData);
+
+    // Calculate nights and days when both dates are selected
+    if (name === 'checkIn' || name === 'checkOut') {
+      if (newFormData.checkIn && newFormData.checkOut) {
+        const checkInDate = new Date(newFormData.checkIn);
+        const checkOutDate = new Date(newFormData.checkOut);
+
+        if (checkOutDate > checkInDate) {
+          const timeDiff = checkOutDate.getTime() - checkInDate.getTime();
+          const nights = Math.ceil(timeDiff / (1000 * 3600 * 24));
+          const days = nights + 1;
+          setBookingSummary({ nights, days });
+        } else {
+          setBookingSummary({ nights: 0, days: 0 });
+        }
+      }
+    }
   };
 
   const handleWhatsAppSubmit = (e: React.FormEvent) => {
@@ -38,7 +61,7 @@ export default function BookingForm() {
     // Validate form fields
     if (
       !formData.name ||
-      !formData.phone ||
+      !formData.place ||
       !formData.checkIn ||
       !formData.checkOut
     ) {
@@ -46,22 +69,39 @@ export default function BookingForm() {
       return;
     }
 
+    // Validate dates
+    const checkInDate = new Date(formData.checkIn);
+    const checkOutDate = new Date(formData.checkOut);
+
+    if (checkOutDate <= checkInDate) {
+      alert('Check-out date must be after check-in date');
+      return;
+    }
+
+    // Calculate nights and days
+    const timeDiff = checkOutDate.getTime() - checkInDate.getTime();
+    const nights = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    const days = nights + 1;
+
     // Format the message for WhatsApp
     const message = `*New Booking Inquiry*
 
 *Guest Details:*
 Name: ${formData.name}
-Phone: ${formData.phone}
+Property: ${formData.place}
 
 *Stay Details:*
-Check-in: ${new Date(formData.checkIn).toLocaleDateString()}
-Check-out: ${new Date(formData.checkOut).toLocaleDateString()}
+Check-in: ${new Date(formData.checkIn).toLocaleDateString()} (12:00 PM)
+Check-out: ${new Date(formData.checkOut).toLocaleDateString()} (11:00 AM)
 Number of Guests: ${formData.guests}
+Duration: ${nights} night${nights !== 1 ? 's' : ''} / ${days} day${
+      days !== 1 ? 's' : ''
+    }
 
 Looking forward to your confirmation!`;
 
     // Replace this with your WhatsApp business number (in international format without + sign)
-    const whatsappNumber = '918861821773'; // Example: 919876543210 for India
+    const whatsappNumber = '919364030566'; // Example: 919876543210 for India
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
@@ -123,24 +163,32 @@ Looking forward to your confirmation!`;
                 />
               </div>
 
-              {/* Phone */}
+              {/* Place */}
               <div>
                 <label
-                  htmlFor='phone'
+                  htmlFor='place'
                   className='block text-sm font-semibold text-gray-900 mb-1 sm:mb-2'
                 >
-                  Phone Number *
+                  Property *
                 </label>
-                <input
-                  type='tel'
-                  id='phone'
-                  name='phone'
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  required
-                  className='w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:border-gray-400 focus:outline-none transition-colors'
-                  placeholder='+91 8861821773'
-                />
+                <div className='relative'>
+                  <select
+                    id='place'
+                    name='place'
+                    value={formData.place}
+                    onChange={handleInputChange}
+                    required
+                    className='w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-300 bg-white text-gray-900 focus:border-gray-400 focus:outline-none transition-colors appearance-none pr-10'
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                      backgroundPosition: 'right 0.75rem center',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: '1.25rem 1.25rem',
+                    }}
+                  >
+                    <option value='Aurora Coorg'>Aurora Coorg</option>
+                  </select>
+                </div>
               </div>
             </div>
 
@@ -220,7 +268,7 @@ Looking forward to your confirmation!`;
                     backgroundSize: '1.25rem 1.25rem',
                   }}
                 >
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                  {Array.from({ length: 30 }, (_, i) => i + 1).map((num) => (
                     <option key={num} value={num}>
                       {num} {num === 1 ? 'Guest' : 'Guests'}
                     </option>
@@ -228,6 +276,27 @@ Looking forward to your confirmation!`;
                 </select>
               </div>
             </div>
+
+            {/* Booking Summary */}
+            {bookingSummary.nights > 0 && (
+              <div className='bg-green-50 border border-green-200 rounded-lg p-4'>
+                <h4 className='font-semibold text-green-900 mb-2'>
+                  Booking Summary
+                </h4>
+                <div className='grid grid-cols-2 gap-4 text-sm text-green-800'>
+                  <div>
+                    <span className='font-medium'>Duration:</span>{' '}
+                    {bookingSummary.nights} night
+                    {bookingSummary.nights !== 1 ? 's' : ''}
+                  </div>
+                  <div>
+                    <span className='font-medium'>Total Days:</span>{' '}
+                    {bookingSummary.days} day
+                    {bookingSummary.days !== 1 ? 's' : ''}
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Submit Button with WhatsApp */}
             <div className='pt-4'>
@@ -238,6 +307,20 @@ Looking forward to your confirmation!`;
                 <IconBrandWhatsapp className='w-6 h-6' />
                 <span>Send Inquiry via WhatsApp</span>
               </button>
+            </div>
+
+            <div className='bg-blue-50 border border-blue-200 rounded-lg p-4 mt-4'>
+              <h4 className='font-semibold text-blue-900 mb-2'>
+                Check-in & Check-out Times
+              </h4>
+              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-blue-800'>
+                <div>
+                  <span className='font-medium'>Check-in:</span> 12:00 PM
+                </div>
+                <div>
+                  <span className='font-medium'>Check-out:</span> 11:00 AM
+                </div>
+              </div>
             </div>
 
             <p className='text-sm text-gray-600 text-center mt-4'>
@@ -256,12 +339,12 @@ Looking forward to your confirmation!`;
           transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <p className='text-gray-600 text-sm sm:text-base'>
-            Need help? Contact us directly at{' '}
+            Need help? Contact us directly via WhatsApp or call{' '}
             <a
-              href='tel:+918861821773'
+              href='tel:+919364030566'
               className='text-black font-semibold hover:underline'
             >
-              +91 8861821773
+              +91 9364030566
             </a>
           </p>
         </motion.div>

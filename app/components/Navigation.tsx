@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 import { IconMenu2, IconX } from '@tabler/icons-react';
 
 interface NavLink {
@@ -10,10 +11,12 @@ interface NavLink {
 
 const navLinks: NavLink[] = [
   { href: '#', label: 'Home' },
-  { href: '#our-stays', label: 'Properties' },
-  { href: '#testimonials', label: 'Testimonials' },
+  { href: '#our-properties', label: 'Properties' },
+  { href: '#gallery', label: 'Gallery' },
   { href: '#booking', label: 'Book Now' },
-  { href: '#location', label: 'Location' },
+  { href: '#testimonials', label: 'Testimonials' },
+  { href: '#cancellation-policy', label: 'Policy' },
+  // { href: '#location', label: 'Location' },
 ];
 
 const Navigation = () => {
@@ -79,9 +82,9 @@ const Navigation = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
         isScrolled || isMenuOpen
-          ? 'bg-white/80 backdrop-blur-sm shadow-md'
+          ? 'bg-white border-b border-gray-200'
           : 'bg-transparent'
       }`}
       ref={menuRef}
@@ -93,20 +96,21 @@ const Navigation = () => {
             <a
               href='#'
               onClick={(e) => handleNavClick(e, '#')}
-              className='flex items-center cursor-pointer'
+              className='flex gap-2 items-center cursor-pointer'
             >
-              {/* <Image
-                src='/images/logo.webp'
+              <Image
+                src='/images/logo.png'
                 alt='Logo'
-                width={100}
-                height={100}
-              /> */}
+                width={40}
+                height={40}
+                className='w-10 h-10 bg-white rounded-full'
+              />
               <span
                 className={`text-lg sm:text-xl md:text-2xl font-bold transition-colors duration-300 ${
                   isScrolled || isMenuOpen ? 'text-gray-900' : 'text-white'
                 }`}
               >
-                Aurora Coorg
+                TravellersEscape
               </span>
             </a>
           </div>

@@ -46,9 +46,9 @@ export default function Hero() {
           variants={fadeUpVariant}
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         >
-          Your Dream Vacation
+          TravellersEscape
           <span className='block text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500 mt-2'>
-            Starts Here
+            Aurora Coorg
           </span>
         </motion.h1>
 
@@ -59,8 +59,8 @@ export default function Hero() {
           variants={fadeUpVariant}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
         >
-          Experience the perfect blend of comfort and nature in Coorg&apos;s
-          most loved homestay
+          Your trusted partner for luxury vacation rentals and unforgettable
+          travel experiences in Coorg
         </motion.p>
 
         {/* Book Now Button */}

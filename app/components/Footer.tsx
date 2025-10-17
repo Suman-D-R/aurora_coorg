@@ -35,8 +35,11 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <h3 className='text-lg sm:text-xl font-bold mb-2 sm:mb-3 bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent'>
-              Aurora Coorg
+              TravellersEscape
             </h3>
+            <p className='text-xs sm:text-sm text-gray-300 mb-2'>
+              Aurora Coorg
+            </p>
             <p className='text-xs sm:text-sm text-gray-400 mb-3 sm:mb-4 leading-relaxed'>
               Your trusted partner for luxury vacation rentals and unforgettable
               travel experiences in Coorg.
@@ -53,7 +56,7 @@ const Footer = () => {
                 <IconBrandInstagram className='w-5 h-5' />
               </a>
               <a
-                href='https://wa.me/918861821773'
+                href='https://wa.me/919364030566'
                 target='_blank'
                 rel='noopener noreferrer'
                 className='bg-gray-800 p-2 rounded-full hover:bg-green-500 transition-colors touch-manipulation'
@@ -65,7 +68,7 @@ const Footer = () => {
           </div>
 
           {/* Book With Us */}
-          <div>
+          {/* <div>
             <h4 className='text-white font-semibold text-sm sm:text-base mb-3'>
               Book With Us
             </h4>
@@ -131,7 +134,7 @@ const Footer = () => {
                 />
               </a>
             </div>
-          </div>
+          </div> */}
 
           {/* Contact */}
           <div>
@@ -141,7 +144,7 @@ const Footer = () => {
             <ul className='space-y-2'>
               <li className='flex items-start'>
                 <IconPhone className='w-4 h-4 mr-2 mt-0.5 flex-shrink-0' />
-                <span className='text-xs sm:text-sm'>+91 8861821773</span>
+                <span className='text-xs sm:text-sm'>+91 9364030566</span>
               </li>
               <li className='flex items-start'>
                 <IconMail className='w-4 h-4 mr-2 mt-0.5 flex-shrink-0' />
@@ -167,9 +170,15 @@ const Footer = () => {
         >
           <div className='flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4'>
             <p className='text-[10px] sm:text-xs text-gray-400 text-center md:text-left'>
-              © 2025 Aurora Coorg. All rights reserved.
+              © 2025 TravellersEscape - Aurora Coorg. All rights reserved.
             </p>
             <div className='flex flex-wrap justify-center gap-3 sm:gap-4 text-[10px] sm:text-xs'>
+              <a
+                href='#cancellation-policy'
+                className='hover:text-white transition-colors'
+              >
+                Cancellation Policy
+              </a>
               <a href='#' className='hover:text-white transition-colors'>
                 Privacy Policy
               </a>
@@ -178,9 +187,6 @@ const Footer = () => {
               </a>
               <a href='#' className='hover:text-white transition-colors'>
                 Cookie Policy
-              </a>
-              <a href='#' className='hover:text-white transition-colors'>
-                Accessibility
               </a>
             </div>
           </div>
