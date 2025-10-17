@@ -13,7 +13,7 @@ import FloatingActionButtons from './components/FloatingActionButtons';
 
 export default function Home() {
   return (
-    <main className='min-h-screen text-white'>
+    <main className='min-h-svh text-white'>
       <Navigation />
       <Hero />
       <section id='our-properties'>
