@@ -4,7 +4,7 @@ export interface Property {
   location: string;
   capacity: string;
   guests: number;
-  startingPrice: string;
+  // startingPrice: string;
   description: string;
   image: string;
   features: string[];
@@ -22,7 +22,7 @@ export const properties: Property[] = [
     location: 'Coorg, Karnataka',
     capacity: 'Up to 30 guests',
     guests: 30,
-    startingPrice: 'Starting from ₹2,500/night',
+    // startingPrice: 'Starting from ₹2,500/night',
     description:
       'Experience luxury and comfort in our beautiful property, perfect for large groups and family gatherings. Nestled amidst lush greenery, Aurora Coorg offers a serene escape with modern amenities and breathtaking views of the Western Ghats.',
     image: '/images/aurora-villa.webp',
@@ -48,7 +48,6 @@ export const properties: Property[] = [
     amenities: [
       'Free Wi-Fi',
       'Parking',
-      'Kitchen access',
       'Garden',
       'Bonfire area',
       'Mountain view',
