@@ -125,9 +125,9 @@ const OurStays = () => {
                     </span>
                   </div>
                   <div className='text-right'>
-                    <p className='text-white/90 text-sm font-semibold'>
-                      {property.startingPrice}
-                    </p>
+                    {/* <p className='text-white/90 text-sm font-semibold'>
+                      {property?.startingPrice}
+                    </p> */}
                   </div>
                 </div>
 
