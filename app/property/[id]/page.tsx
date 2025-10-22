@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import {
   IconUsers,
   IconMapPin,
@@ -29,6 +29,20 @@ const PropertyDetails = () => {
 
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    // Set initial value
+    setIsDesktop(window.innerWidth > 768);
+
+    // Add event listener for window resize
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth > 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const fadeUpVariant = {
     hidden: { opacity: 0, y: 60 },
@@ -99,9 +113,7 @@ Thank you!`;
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <Image
-            src={
-              window.innerWidth > 768 ? property.desktopImage : property.image
-            }
+            src={isDesktop ? property.desktopImage : property.image}
             alt={property.name}
             fill
             className='object-cover object-bottom group-hover:scale-105 transition-transform duration-300'
