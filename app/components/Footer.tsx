@@ -148,7 +148,9 @@ const Footer = () => {
               </li>
               <li className='flex items-start'>
                 <IconMail className='w-4 h-4 mr-2 mt-0.5 flex-shrink-0' />
-                <span className='text-xs sm:text-sm'>info@auroracoorg.com</span>
+                <span className='text-xs sm:text-sm'>
+                  travellersescape75@gmail.com
+                </span>
               </li>
               <li className='flex items-start'>
                 <IconMapPin className='w-4 h-4 mr-2 mt-0.5 flex-shrink-0' />
