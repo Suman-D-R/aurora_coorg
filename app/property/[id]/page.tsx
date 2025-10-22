@@ -125,7 +125,7 @@ Thank you!`;
                 </span>
               </div>
               <div className='text-sm sm:text-base md:text-lg font-bold'>
-                {property.startingPrice}
+                {/* {property.startingPrice} */}
               </div>
             </div>
           </div>
@@ -233,14 +233,14 @@ Thank you!`;
               </h3>
 
               <div className='space-y-3 sm:space-y-4 mb-4 sm:mb-6'>
-                <div className='flex items-center justify-between'>
+                {/* <div className='flex items-center justify-between'>
                   <span className='text-gray-600 text-sm sm:text-base'>
                     Price
                   </span>
                   <span className='font-semibold text-sm sm:text-base'>
                     {property.startingPrice}
                   </span>
-                </div>
+                </div> */}
                 <div className='flex items-center justify-between'>
                   <span className='text-gray-600 text-sm sm:text-base'>
                     Capacity
